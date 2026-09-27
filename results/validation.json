@@ -1,0 +1,30 @@
+{
+ "ode_max_abs_diff": 1.9609314172441827e-13,
+ "ode_lnE_diff": 3.360922651296505e-13,
+ "det_minus_one": 1.7763568394002505e-15,
+ "interface_amplitude_error": 1.1443916996305594e-16,
+ "interface_flux_error": 2.220446049250313e-16,
+ "lyapunov_null_max": 8.54351311918576e-17,
+ "two_slab_gap": [
+  1.52275,
+  1.62275
+ ],
+ "two_slab_rate_exact": 0.09994786154325258,
+ "two_slab_rel_error": {
+  "1024": 1.1237430070476506e-05,
+  "16384": 7.02339373104266e-07,
+  "65536": 1.7558484843860356e-07
+ },
+ "inband_fraction_max": 2.2050758793578895e-32,
+ "std_error_max": 1.3877787807814457e-17,
+ "mean_abs_max": 5.963111948670274e-19,
+ "kappa2_measured": 1.2367574983495098,
+ "kappa2_formula": 1.236786469344609,
+ "mean_energy_rms_z": 1.059291002537274,
+ "mean_energy_max_abs_z": 2.2721324890468,
+ "heat_kernel_max_error": 6.117417683526583e-11,
+ "pd_white_fraction_range": [
+  0.6613968357015699,
+  0.9213708261822592
+ ]
+}
