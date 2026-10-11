@@ -1,7 +1,6 @@
 # Band-stealthy temporal disorder
 
-Code, data and the executed study notebook for the manuscript *Band-stealthy temporal
-disorder suppresses disorder-induced parametric amplification in time-varying media* by
+Code, data and the executed study notebook for the manuscript *Band-stealthy temporal disorder suppresses parametric amplification in time-varying media* by
 Hitesh Kumar Singh.
 
 A dielectric whose permittivity fluctuates randomly in time amplifies waves parametrically.
