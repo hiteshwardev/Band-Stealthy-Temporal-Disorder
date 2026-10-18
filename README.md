@@ -1,122 +1,59 @@
-# Band-stealthy temporal disorder
+# Band-Stealthy Temporal Disorder Suppresses Parametric Amplification in Time-Varying Media
 
-Code, data and the executed study notebook for the manuscript *Band-stealthy temporal disorder suppresses parametric amplification in time-varying media* by
-Hitesh Kumar Singh.
+**Author:** Hitesh Kumar Singh · [ORCID: 0009-0008-1583-4848](https://orcid.org/0009-0008-1583-4848)
+*Department of Physics, Kurukshetra University, Kurukshetra, Haryana, India*
 
-A dielectric whose permittivity fluctuates randomly in time amplifies waves parametrically.
-To leading order a mode of frequency $\omega$ grows at a rate set by the modulation spectrum
-at $2\omega$. Removing a band $\Omega$ from that spectrum at fixed variance, which we call
-band-stealthy temporal disorder, removes the leading-order growth of every mode with
-$2\omega$ inside $\Omega$. The study measures the residual growth by exact propagation
-through temporal slabs, explains it with a phase-diffusion theory that has no free
-parameter, quantifies the cost for the unprotected modes, and tests the construction against
-the imperfections of a real modulator.
+---
 
-## Main results
+## Abstract
 
-Values from `results/summary.json`, for slabs of unit duration, modulation depth
-$m_0=0.05$ and sequences of 4096 slabs unless stated otherwise.
+Random temporal modulation can parametrically amplify waves, with the leading-order growth of a mode determined by the modulation spectrum at twice its frequency. This work introduces **band-stealthy temporal disorder**, in which a finite frequency band is removed from the modulation spectrum at fixed variance, suppressing the leading-order amplification of every mode whose parametric resonance lies in the removed band. Exact propagation through sequences of temporal slabs, together with a parameter-free correction for finite observation horizons based on the heat kernel of the hyperbolic plane, gives a median reduction in the mean-energy growth rate by a factor of 526 ± 11 at a modulation depth of 0.05. The residual in-band growth scales approximately as the fourth power of the modulation depth and is described by a phase-diffusion theory without adjustable parameters. At fixed variance, spectral weight removed from the protected band is redistributed to unprotected frequencies. Comparisons with hyperuniform and shifted-band controls show that protection depends on the placement of the spectral notch relative to the parametric resonance, not on the amount of imposed correlation. Constraints on notch depth, timing jitter, the modulation variable and drive smoothness in dispersive media are quantified.
 
-| Quantity | Value |
-| --- | --- |
-| Median protection factor over the protected window, $R=\Gamma_{2,W}/\hat\Gamma_{2,S}$ | 526 ± 11 |
-| Phase-diffusion prediction for the same median | 517 |
-| Depth exponent of the residual inside the window (prediction) | 3.95 ± 0.02 (4.01) |
-| Depth exponent outside the window | 2.00 ± 0.02 |
-| Out-of-window rate relative to the exact white rate, measured and $\kappa^2$ | 1.2311 ± 0.0035 and 1.2368 |
-| Same number of removed components at zero frequency (hyperuniform): $R$ in the window | 0.83 |
-| Usable fraction of the window ($R\ge10$) at $m_0=0.05$ and 0.20 | 0.99 and 0.86 |
-| Stealthiness imposed on the permittivity instead of its inverse: $R$ (prediction) | 176 (172) |
-| Notch of 40 dB instead of an exact zero: $R$ | 484 |
-| Timing jitter of 2% of the slab duration: $R$ | 464 |
-| Lorentz medium ($w_r/\omega=40$), band-limited drive: $R$ of the lower polariton | > 680 |
+## Core Objectives
 
-## Repository layout
+- Determine whether engineering the **spectrum** of temporal disorder, rather than only its strength, can suppress disorder-driven parametric amplification in time-varying media.
+- Identify which spectral construction protects a mode, and distinguish it from hyperuniform disorder.
+- Quantify the price (redistribution to unprotected modes), the residual (higher-order growth) and the realistic limits (notch depth, timing jitter, modulation variable, dispersion).
 
-```
-band_stealthy_temporal_disorder.ipynb   the complete study: theory, validation, simulations,
-                                        figures and the table of final numbers
-src/
-    model.py          exact slab propagator, growth-rate estimators, exact reference rates
-    ensembles.py      modulation sequences and the seeding of every ensemble
-    simulate.py       ensemble runs and their reduction to growth rates
-    theory.py         heat-kernel crossover, phase-diffusion theory, imperfection models
-    dispersive.py     Lorentz medium and the split of its energy into polariton branches
-    figures.py        figure style and the layout check applied to every figure
-    records.py        result files that do not change between runs
-tests/test_core.py    tests of the modules
-figures/              every figure of the manuscript, PNG at 600 dpi and PDF
-results/              intermediate data (.npz) and all quoted numbers (summary.json)
-requirements.txt      pinned package versions (environment.yml for conda)
-```
+## Scientific Significance
 
-## Reproducing the study
+Temporal modulation underlies photonic time crystals, temporal interfaces and amplified emission, and every real modulator is noisy. Random temporal modulation is a source of gain, so devices built on temporal modulation must contend with it. In space, correlated and stealthy disorder is an established design tool. This project shows that the temporal analogue is not hyperuniformity: the constraint must be placed at **twice the signal frequency**, away from the origin. It gives a quantitative spectral-design rule for noise tolerance in time-varying photonic and wave systems.
 
-With Python 3.11:
+## Methodological Approach
 
-```
-python -m venv .venv
-source .venv/bin/activate            # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-python -m pytest -q                  # 22 tests, about ten seconds
-jupyter execute --inplace band_stealthy_temporal_disorder.ipynb
-```
+- **Exact slab propagation:** sequences of temporal slabs are propagated with exact SL(2,ℝ) transfer matrices, with no time stepping.
+- **Ensembles:** white, band-stealthy and shuffled (same values, correlations destroyed) sequences at six modulation depths, 53 mode frequencies, 400 realizations of 4096 slabs per point, with additional horizons and twelve independent families for the headline estimate.
+- **Finite-horizon bias removal:** a closed-form crossover function from the hyperbolic-plane heat kernel and a standing-wave identity convert finite-horizon slopes to mean-energy rates.
+- **Theory:** a phase-diffusion resummation (Eq. 16 of the manuscript) with no fitted constants, compared against simulation across depths, band edges and imperfections.
+- **Validation:** propagator against eighth-order Runge-Kutta, Lyapunov estimator against exact Floquet rates, and Monte Carlo against the exact white-noise rate.
 
-With conda, `conda env create -f environment.yml` followed by
-`conda activate band-stealthy-temporal-disorder` replaces the first three lines. The
-notebook can also be run cell by cell in JupyterLab (`pip install jupyterlab`). A complete
-run takes about twenty minutes on two processor cores and needs about 2 GB of memory.
-It rewrites every file in `results/` and `figures/` and reads nothing that it has not written
-itself.
+## Contributions
 
-## Reproducibility
+1. A band-stealthy construction for temporal disorder and the demonstration that protection is set by band **placement relative to the parametric resonance**.
+2. A phase-diffusion theory that predicts the residual amplification, its rise toward band edges and the loss of protection near edges, with no adjustable parameters.
+3. A closed-form correction for finite-horizon bias in typical growth rates, based on the hyperbolic-plane heat kernel.
+4. A realizability analysis: finite notch depth, timing jitter, non-Gaussian slab values, band-limited drive, the choice of engineered variable and a lossless Lorentz medium.
 
-Every random ensemble is drawn from a generator seeded with the SHA-256 digest of
-descriptive tags (`src/ensembles.py`), so an ensemble is fixed by its name and does not
-depend on the order of the computation. Result files carry no timestamps
-(`src/records.py`). Two complete runs, one of them in a fresh environment built from
-`requirements.txt`, produced byte-identical files in `results/` and `figures/`. Other
-versions of NumPy, SciPy or the underlying linear-algebra library can change the last digits.
+5. **Positioning relative to prior work.** The project builds on engineered temporal disorder via a structure factor (Kim et al., *Nat. Phys.* 19, 726, 2023) and on stealthy hyperuniform media in space. A literature search in October 2026 found no earlier work that removes a finite band at twice the mode frequency to suppress parametric amplification in time-varying media. This is a search result, not a proof of priority.
 
-## Changes with respect to earlier versions
+## Key Findings
 
-This repository replaces the earlier versions of the project
-(`Temporal-Stealthy-Hyperuniformity` and `TSH-V2`). The following statements changed.
+- Median protection factor **526 ± 11** at 5% modulation depth (range 163–709 over the window interior); it scales as m₀⁻² (fitted exponent −2.02 ± 0.03).
+- The in-band residual scales as m₀⁴ (fitted 3.95 ± 0.02); the theory predicts a median of 517, within 2% of the measurement.
+- Unprotected modes pay a fixed redistribution factor κ² = 1.2368 (N = 4096); the measured value is 1.2311 ± 0.0035.
+- Hyperuniform and shifted-band controls show no protection in the primary window (R ≈ 0.8) and protect only their own bands.
+- A 40 dB notch recovers most of the ideal protection (R = 484); 2% timing jitter lowers the median protection by 12% and 5% jitter by 55%.
+- Stealthiness should be imposed on the inverse permittivity μ; imposing it on the permittivity modulation instead lowers the median protection to 176.
+- In a dispersive Lorentz medium the drive must be smooth on the time scale of the material resonance.
 
-1. **Name.** The construction was called temporal stealthy hyperuniformity. The sequences
-   are not hyperuniform: only the zero-frequency component and a band at finite frequency
-   are removed, and the spectrum near zero frequency is raised by $\kappa^2$. A control with
-   the same number of removed components at the origin, which is hyperuniform, gives no
-   protection in the window (notebook Section 12).
-2. **Headline number.** Earlier versions quoted a suppression of about $3\times10^2$ from
-   the ratio of typical growth slopes of the two ensembles at the same horizon. At a given
-   horizon the white ensemble has grown much more than the band-stealthy one, and the
-   finite-horizon slope of a forward-launched wave falls from twice the typical rate towards
-   the typical rate as the growth accumulates, so that ratio understates the protection. The
-   protection factor is now a ratio of mean-energy rates: the exact white rate over the
-   band-stealthy rate obtained by inverting the finite-horizon crossover computed from the
-   heat kernel of the hyperbolic plane. It is the median over twelve pooled seed families,
-   with a bootstrap uncertainty over families.
-3. **Lyapunov estimator.** The QR estimator accumulated norms in the variables
-   $(D,\dot D)$, in which free evolution is not a rotation, and returned nonzero exponents
-   for a constant medium; earlier versions calibrated around this defect. The estimator now
-   works in $(\omega D,\dot D)$ and returns zero to rounding for a constant medium, which a
-   test enforces.
-4. **Dispersive medium.** Earlier statements about a Lorentz medium are superseded. The
-   energy is now split exactly into lower- and upper-polariton parts. With a drive that is
-   band limited on the time scale of the material resonance, the lower polariton, the
-   protected mode, keeps the protection of the instantaneous model. Abrupt switching
-   transfers energy to the upper polariton, for white and band-stealthy modulation alike.
-5. **Uncertainty of the headline.** Earlier versions quoted the headline from a single seed
-   family, without an uncertainty derived from the scatter between families or from the
-   dependence on analysis choices. The statistical uncertainty now comes from resampling
-   twelve families. Alternative fit windows and horizons are treated as consistency checks
-   with statistical errors for their differences; none differs significantly from the
-   headline, so no systematic uncertainty is added. Other summary statistics of
-   $R(\omega)$ are reported separately because they are not estimates of the median.
-6. **Stealthiness imposed on the permittivity.** The prediction now includes the third
-   cumulant of the modulation, which sets its frequency dependence.
+## Scope and Limitations
 
-## License
+All results are computational; no experiment was performed. The model is scalar, one-dimensional in wavevector, lossless and spatially uniform. The phase-diffusion theory is not a complete fourth-order theory (it reproduces 66–92% of the exact fourth-order correction for independent slabs). The dispersive study uses a single undamped Lorentz resonance.
 
-MIT, see `LICENSE`.
+## Roles
+
+Hitesh Kumar Singh is the sole author. Hitesh Kumar Singh conceived the study, developed the theory, wrote the code, performed the simulations and analysis, prepared the figures and wrote the manuscript. This included designing the benchmark and validation suite and the reproducible, seeded computational workflow.
+
+## Reproducibility and Availability
+
+The repository contains the code and the executed notebook that generate every figure and number in the manuscript. Random streams are seeded from descriptive tags so that every ensemble is fixed by its name. The code is released under the MIT License.
