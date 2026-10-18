@@ -34,7 +34,7 @@ Temporal modulation underlies photonic time crystals, temporal interfaces and am
 3. A closed-form correction for finite-horizon bias in typical growth rates, based on the hyperbolic-plane heat kernel.
 4. A realizability analysis: finite notch depth, timing jitter, non-Gaussian slab values, band-limited drive, the choice of engineered variable and a lossless Lorentz medium.
 
-5. **Positioning relative to prior work.** The project builds on engineered temporal disorder via a structure factor (Kim et al., *Nat. Phys.* 19, 726, 2023) and on stealthy hyperuniform media in space. A literature search in October 2026 found no earlier work that removes a finite band at twice the mode frequency to suppress parametric amplification in time-varying media. This is a search result, not a proof of priority.
+5. **Positioning relative to prior work.** The project builds on engineered temporal disorder via a structure factor (Kim et al., *Nat. Phys.* 19, 726, 2023) and on stealthy hyperuniform media in space.
 
 ## Key Findings
 
